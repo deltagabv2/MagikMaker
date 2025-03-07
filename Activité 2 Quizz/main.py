@@ -39,14 +39,13 @@ def question():
         score = sorted(session["score"], key = session["score"].get, reverse = True)
         vainqueur = score[0]
         description = resultats[vainqueur]
-        return render_template("page3.html", nom_vainqueur = vainqueur, description = description)
+        return render_template("page3.html", vainqueur = vainqueur, description = description)
 
 @app.route("/reponse/<numero>")
 def reponse(numero):
     session["numero_question"] += 1
     resultat = session["clefs"][int(numero)]
     session["score"][resultat] += 1
-    print(session["score"])
     return redirect("/page2")
 
 
