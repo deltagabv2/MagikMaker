@@ -10,6 +10,7 @@ import random
 # Création de l'instance de l'app Flask
 app = Flask("Pendu")
 
+from pendu import Pendu
 app.secret_key = os.urandom(24)
 
 @app.route("/")
@@ -20,6 +21,8 @@ def accueil():
     mot_a_deviner = random.choice(liste_de_mots)
     # On définit le nombre de vies
     vies = 6
+    # On crée une instance du Pendu
+    session["etat_du_jeu"] = Pendu.initialisation(mot_a_deviner, vies)
 
     return redirect("/jeu")
 
