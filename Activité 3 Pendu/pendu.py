@@ -25,7 +25,7 @@ class Pendu:
             "defaite" : False,
             "victoire" : False,
             "entree" : "",
-            "lettre_proposees" : []
+            "lettres_proposees" : []
         }
 
         return data_etat_du_jeu
@@ -56,8 +56,12 @@ class Pendu:
             "derniere_entree" : ""
         }
 
+        entree = unidecode(entree)
+
         # On vérifie si l'utilisateur a tenté un mot ou une lettre
-        if len(entree) == 1 :
+        if len(entree) == 0 :
+            message = "Propose quelque chose"
+        elif len(entree) == 1 :
             message = Pendu.deviner_lettre(entree)
         else:
             message = Pendu.deviner_mot(entree)
@@ -133,7 +137,7 @@ class Pendu:
             # On vérifie dans mot_a_deviner si la lettre est à la position i
             if lettre == mot_a_deviner[i]:
                 # On passe par une liste car les str sont immuables
-                mot_tmp = list(mot_a_deviner)
+                mot_tmp = list(mot_a_afficher)
                 # On ajoute à lettre à la bonne position cad i
                 mot_tmp [i] = lettre
                 # On récupère le str avec la méthode
